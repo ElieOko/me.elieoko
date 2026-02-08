@@ -8,9 +8,25 @@ import ImageGallery from '@/components/ui/ImageGallery.vue';
 
 <template>
   <main>
-    <HeroSection/>
-    <ImageGallery/>
+  <HeroSection/>
+     <ImageGallery/> 
     <ExpertiseSection/>
     <ContactSection/>
   </main>
 </template>
+<style>
+.main-content {
+  position: relative;
+  z-index: 1; /* Au-dessus des backgrounds */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenu de la page d'accueil */
+.home-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+</style>

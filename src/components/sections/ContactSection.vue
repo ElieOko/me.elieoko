@@ -665,20 +665,22 @@ const openTerms = () => {
 <style scoped>
 .contact-section {
   padding: 6rem 0;
-  /* position: relative; */
-  overflow: hidden;
+  position: relative;
+  overflow: visible; /* Changé de hidden à visible */
+  min-height: 100vh; /* Assure une hauteur minimale */
 }
 
 /* Background Circuit */
 .contact-bg {
-  /* position: absolute; */
+  position: absolute;
   inset: 0;
   z-index: -1;
   opacity: 0.1;
+  pointer-events: none; /* Empêche l'interaction */
 }
 
 .bg-circuit {
-  position: absolute;
+  position: fixed; /* Changé de absolute à fixed */
   inset: 0;
 }
 
@@ -718,6 +720,8 @@ const openTerms = () => {
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -743,12 +747,14 @@ const openTerms = () => {
   margin: 0 auto;
 }
 
-/* Contact Content */
+/* Contact Content - CRITIQUE : Enlever le sticky problématique */
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1024px) {
@@ -769,6 +775,8 @@ const openTerms = () => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .info-title {
@@ -891,6 +899,7 @@ const openTerms = () => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
+  backdrop-filter: blur(10px);
 }
 
 .social-title {
@@ -956,7 +965,7 @@ const openTerms = () => {
   opacity: 0.5;
 }
 
-/* Contact Form */
+/* Contact Form - SOLUTION : Enlever le sticky et utiliser une hauteur fixe */
 .contact-form {
   position: relative;
 }
@@ -966,8 +975,10 @@ const openTerms = () => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
-  position: sticky;
-  top: 2rem;
+  /* SUPPRIMER : position: sticky et top: 2rem */
+  height: auto; /* Laisser le contenu déterminer la hauteur */
+  min-height: 600px; /* Hauteur minimale pour garder la cohérence */
+  backdrop-filter: blur(10px);
 }
 
 .form-header {
@@ -1456,12 +1467,17 @@ font-size: 1.5rem;
 
 /* Responsive */
 @media (max-width: 768px) {
+.contact-section {
+padding: 4rem 0;
+}
+
 .section-title {
 font-size: 2rem;
 }
 
 .form-card {
 padding: 1.5rem;
+min-height: 500px; /* Ajustement pour mobile */
 }
 
 .form-steps {
@@ -1482,6 +1498,10 @@ gap: 1rem;
 .info-card,
 .social-card {
 padding: 1.5rem;
+}
+
+.contact-content {
+gap: 2rem;
 }
 }
 </style>

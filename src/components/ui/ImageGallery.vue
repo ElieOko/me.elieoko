@@ -47,8 +47,8 @@ const imageLoaded = ref(false)
 }
 
 .simple-frame {
-  width: 450px;
-  height: 450px;
+  width: 250px;
+  height: 250px;
   margin: 0 auto 1.5rem;
   border-radius: 50%;
   overflow: hidden;

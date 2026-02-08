@@ -8,6 +8,8 @@ import FooterSection from './components/layout/FooterSection.vue';
 </script>
 
 <template>
+  <main class="backgrounds-container ">
+  <!-- Backgrounds -->
    <MatrixBackground 
       :intensity="0.6"
       :speed="1.2"
@@ -20,4 +22,11 @@ import FooterSection from './components/layout/FooterSection.vue';
    
   <RouterView />
   <FooterSection/>
+  </main>
+   
 </template>
+<style>
+
+
+
+</style>

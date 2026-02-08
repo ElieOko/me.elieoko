@@ -83,7 +83,7 @@
     <div class="mobile-menu" :class="{ open: isMobileMenuOpen }">
       <div class="mobile-menu-content">
         <div class="mobile-menu-header">
-          <div class="mobile-logo">NovaSphere</div>
+          <div class="mobile-logo">ElieOko</div>
           <button class="mobile-close" @click="toggleMobileMenu">
             <i class="fas fa-times"></i>
           </button>

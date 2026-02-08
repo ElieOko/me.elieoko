@@ -71,7 +71,7 @@ const createParticle = (): Particle => {
     size: Math.random() * (particleConfig.maxSize - particleConfig.minSize) + particleConfig.minSize,
     speedX: (Math.random() - 0.5) * 2 * particleConfig.maxSpeed,
     speedY: (Math.random() - 0.5) * 2 * particleConfig.maxSpeed,
-    color: particleConfig.colors[Math.floor(Math.random() * particleConfig.colors.length)],
+    color: particleConfig.colors[Math.floor(Math.random() * particleConfig.colors.length)] as string,
     opacity: Math.random() * 0.5 + 0.3,
     life: Math.random() * 100,
     maxLife: 100,
@@ -121,11 +121,13 @@ const animate = () => {
     particle.opacity = lifeRatio * 0.5 + 0.3
     
     // Dessiner particule
-    ctx.value.beginPath()
-    ctx.value.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-    ctx.value.fillStyle = particle.color
-    ctx.value.globalAlpha = particle.opacity
-    ctx.value.fill()
+    if (ctx.value != undefined) {
+      ctx.value.beginPath()
+      ctx.value.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+      ctx.value.fillStyle = particle.color
+      ctx.value.globalAlpha = particle.opacity
+      ctx.value.fill()
+    }
     
     // Dessiner connections
     particles.value.forEach(otherParticle => {
@@ -136,6 +138,7 @@ const animate = () => {
       const distance = Math.sqrt(dx * dx + dy * dy)
       
       if (distance < particleConfig.connectionDistance) {
+        if (ctx.value != undefined) {
         ctx.value.beginPath()
         ctx.value.moveTo(particle.x, particle.y)
         ctx.value.lineTo(otherParticle.x, otherParticle.y)
@@ -143,22 +146,27 @@ const animate = () => {
         ctx.value.globalAlpha = 0.1 * (1 - distance / particleConfig.connectionDistance)
         ctx.value.lineWidth = 1
         ctx.value.stroke()
+        }
+      
       }
     })
     
     // Effet de brillance
     if (Math.random() > 0.95) {
-      ctx.value.beginPath()
-      ctx.value.arc(
-        particle.x, 
-        particle.y, 
-        particle.size * 2, 
-        0, 
-        Math.PI * 2
-      )
-      ctx.value.fillStyle = particle.color
-      ctx.value.globalAlpha = 0.2
-      ctx.value.fill()
+    
+      if (ctx.value != undefined) {
+        ctx.value.beginPath()
+        ctx.value.arc(
+          particle.x, 
+          particle.y, 
+          particle.size * 2, 
+          0, 
+          Math.PI * 2
+        )
+        ctx.value.fillStyle = particle.color
+        ctx.value.globalAlpha = 0.2
+        ctx.value.fill()
+      }
     }
   })
   

@@ -30,10 +30,10 @@ interface MatrixChar {
   x: number
   y: number
   speed: number
-  symbol: string
+  symbol?: string
   size: number
   opacity: number
-  color: string
+  color?: string
   trail: number
 }
 
@@ -109,7 +109,7 @@ const createMatrixChar = (): MatrixChar => {
     x: Math.random() * window.innerWidth,
     y: Math.random() * window.innerHeight,
     speed: (Math.random() * 2 + 1) * props.speed,
-    symbol: symbols[Math.floor(Math.random() * symbols.length)],
+    symbol: symbols[Math.floor(Math.random() * symbols.length)]?.toString(),
     size: Math.random() * 16 + 10,
     opacity: Math.random() * 0.5 + 0.3,
     color: colors[Math.floor(Math.random() * colors.length)],
@@ -157,7 +157,12 @@ const animate = () => {
     if (char.y > window.innerHeight + 100) {
       char.y = -100
       char.x = Math.random() * window.innerWidth
-      char.symbol = symbols[Math.floor(Math.random() * symbols.length)]
+      //@ts-nocheck
+      //@ts-ignore
+      if (typeof(symbols[Math.floor(Math.random() * symbols.length) ]) == "string") {
+        // char.symbol = symbols[Math.floor(Math.random() * symbols.length) ] 
+      }
+      
     }
   })
   

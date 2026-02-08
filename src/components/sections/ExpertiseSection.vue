@@ -181,7 +181,7 @@ interface RadarSkill {
 const radarSkills: RadarSkill[] = [
   // Frontend - secteur Nord-Est
   { name: 'TypeScript', level: 5, angle: 20, category: 'Frontend' },
-  { name: 'Vuejs', level: 5, angle: 40, category: 'Frontend' },
+  { name: 'Vues', level: 5, angle: 40, category: 'Frontend' },
   
   // Systems - secteur Est
   { name: 'Rust', level: 4, angle: 70, category: 'Systems' },
@@ -242,25 +242,31 @@ const getCategoryColor = (category: string) => {
 const handleCardHover = (card: HTMLElement | undefined) => {
   if (!card) return
   
+   const e = window.event as MouseEvent
   const rect = card.getBoundingClientRect()
-  const x = event.clientX - rect.left
-  const y = event.clientY - rect.top
+  if (e != undefined ) {
+     const x =  e.clientX - rect.left
+    const y = e.clientY - rect.top
   
   const centerX = rect.width / 2
   const centerY = rect.height / 2
   
   const rotateY = ((x - centerX) / centerX) * 5
-  const rotateX = ((centerY - y) / centerY) * 5
-  
+    const rotateX = ((centerY - y) / centerY) * 5
   card.style.transform = `
     perspective(1000px)
     rotateX(${rotateX}deg)
     rotateY(${rotateY}deg)
     scale(1.02)
   `
+  }
+ 
   
+  
+  
+  const list = [card1, card2, card3, card4]
 
-[card1, card2, card3, card4].forEach(c => {
+list.forEach(c => {
     if (c.value) {
       c.value.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'
     }

@@ -1,28 +1,38 @@
 <template>
   <section id="veille" class="section veille">
-    <div class="container">
-      <header class="veille-header">
+    <div class="container editorial-grid">
+      <aside class="section-aside">
+        <span class="section-number">03</span>
         <p class="section-eyebrow">Veille technologique</p>
-        <h2 class="section-title">Ce que je suis</h2>
-        <p class="section-lead">
-          Cloud natif, cybersécurité, conformité, souveraineté numérique,
-          architecture et outils d’observabilité — une sélection de références
-          que je consulte régulièrement.
+        <p>
+          Une bibliothèque personnelle pour rester proche des pratiques qui
+          structurent le métier : architecture, delivery, sécurité et cloud.
         </p>
-      </header>
+      </aside>
 
-      <div class="veille-groups">
-        <div v-for="group in groups" :key="group.title" class="veille-group">
-          <h3>{{ group.title }}</h3>
-          <ul>
-            <li v-for="link in group.links" :key="link.url">
-              <a :href="link.url" target="_blank" rel="noopener">
-                <span class="link-title">{{ link.label }}</span>
-                <span class="link-note">{{ link.note }}</span>
-                <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-              </a>
-            </li>
-          </ul>
+      <div class="veille-content">
+        <header class="veille-header">
+          <h2 class="section-title">Ce que je suis</h2>
+          <p class="section-lead">
+            Cloud natif, cybersécurité, conformité, souveraineté numérique,
+            architecture et outils d’observabilité — une sélection de références
+            que je consulte régulièrement.
+          </p>
+        </header>
+
+        <div class="veille-groups">
+          <div v-for="group in groups" :key="group.title" class="veille-group">
+            <h3>{{ group.title }}</h3>
+            <ul>
+              <li v-for="link in group.links" :key="link.url">
+                <a :href="link.url" target="_blank" rel="noopener">
+                  <span class="link-title">{{ link.label }}</span>
+                  <span class="link-note">{{ link.note }}</span>
+                  <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -162,33 +172,41 @@ const groups: WatchGroup[] = [
 
 <style scoped>
 .veille {
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, rgba(239, 228, 210, 0.7), rgba(247, 241, 231, 0.9)),
+    var(--paper);
 }
 
 .veille-header {
-  margin-bottom: 3rem;
-  max-width: 40rem;
+  margin-bottom: 2.7rem;
+  max-width: 48rem;
 }
 
 .veille-groups {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 2.2rem 2.6rem;
 }
 
 .veille-group h3 {
-  font-size: 1.05rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.65rem;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
   border-bottom: 2px solid var(--accent);
   display: inline-block;
+  text-transform: uppercase;
 }
 
 .veille-group ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0;
+  border-top: 1px solid var(--line);
 }
 
 .veille-group a {
@@ -196,29 +214,26 @@ const groups: WatchGroup[] = [
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   column-gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: var(--paper-elevated);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
   color: var(--ink);
-  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  transition: color 0.2s var(--ease), padding-left 0.2s var(--ease);
 }
 
 .veille-group a:hover {
-  border-color: rgba(26, 107, 92, 0.4);
-  box-shadow: var(--shadow);
-  color: var(--ink);
+  color: var(--accent);
+  padding-left: 0.3rem;
 }
 
 .link-title {
   grid-column: 1;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .link-note {
   grid-column: 1;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   color: var(--muted);
 }
 

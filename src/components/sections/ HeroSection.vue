@@ -1,22 +1,31 @@
 <template>
   <section id="home" class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="section-eyebrow reveal">Ingénieur logiciel · Soficom Transfert RDC</p>
-        <h1 class="hero-brand reveal reveal-delay-1">Elie Oko</h1>
+    <div class="container hero-shell">
+      <article class="hero-copy">
+        <p class="section-eyebrow reveal">Ingénieur logiciel · Kinshasa</p>
+        <h1 class="hero-brand reveal reveal-delay-1">
+          Construire des logiciels utiles, fiables et faciles à faire évoluer.
+        </h1>
         <p class="hero-tagline reveal reveal-delay-2">
-          Je conçois et déploie des applications web et mobiles fiables pour les
-          entreprises — de la banque aux opérations métier. En reconversion vers
-          le cloud et la cybersécurité.
+          Je conçois et déploie des applications web, mobiles et systèmes métier
+          pour les entreprises. Mon travail relie architecture, delivery et
+          qualité produit, avec une progression active vers le cloud et la
+          cybersécurité.
         </p>
-        <p class="hero-role reveal reveal-delay-2">
-          Actuellement ingénieur logiciel chez
-          <strong>Soficom Transfert RDC</strong>.
-        </p>
+        <dl class="hero-meta reveal reveal-delay-2">
+          <div>
+            <dt>Actuellement</dt>
+            <dd>Ingénieur logiciel chez Soficom Transfert RDC</dd>
+          </div>
+          <div>
+            <dt>Orientation</dt>
+            <dd>Cloud, sécurité, systèmes distribués et conformité</dd>
+          </div>
+        </dl>
         <div class="hero-cta reveal reveal-delay-3">
           <button class="btn btn-primary" @click="go('#projects')">
-            Voir les projets
+            Lire les projets
             <i class="fas fa-arrow-right"></i>
           </button>
           <a
@@ -29,19 +38,30 @@
             GitHub
           </a>
         </div>
-      </div>
+      </article>
 
-      <div class="hero-visual reveal reveal-delay-2">
+      <aside class="author-card reveal reveal-delay-2" aria-label="Profil d'Elie Oko">
         <div class="photo-frame">
-          <div class="photo-ring" aria-hidden="true"></div>
-          <div class="photo-glow" aria-hidden="true"></div>
           <img
-            src="@/assets/images/elie.jpeg"
+            src="https://avatars.githubusercontent.com/u/109554173?v=4"
             alt="Elie Oko"
             class="hero-photo"
           />
+          <p class="photo-caption">Elie Oko</p>
         </div>
-      </div>
+        <div class="author-note">
+          <span class="note-label">Note de terrain</span>
+          <p>
+            Des produits en production, des prototypes d’apprentissage et une
+            veille continue sur l’architecture logicielle.
+          </p>
+        </div>
+        <ul class="quick-links">
+          <li><span>01</span> Applications web & mobile</li>
+          <li><span>02</span> Backend, API & intégrations</li>
+          <li><span>03</span> Déploiement et opérations</li>
+        </ul>
+      </aside>
     </div>
   </section>
 </template>
@@ -55,10 +75,10 @@ const go = (id: string) => {
 <style scoped>
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
-  padding: 7rem 0 4rem;
+  padding: 8rem 0 5rem;
   overflow: hidden;
 }
 
@@ -67,54 +87,72 @@ const go = (id: string) => {
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(135deg, transparent 40%, rgba(26, 107, 92, 0.06) 100%),
+    linear-gradient(90deg, rgba(180, 55, 34, 0.09) 0, rgba(180, 55, 34, 0.09) 7px, transparent 7px),
     repeating-linear-gradient(
-      -12deg,
+      90deg,
       transparent,
-      transparent 48px,
-      rgba(12, 25, 41, 0.025) 48px,
-      rgba(12, 25, 41, 0.025) 49px
+      transparent 96px,
+      rgba(55, 44, 35, 0.045) 96px,
+      rgba(55, 44, 35, 0.045) 97px
     );
+  background-size: 100% 100%, 100% 100%;
+  opacity: 0.75;
 }
 
-.hero-grid {
+.hero-shell {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 3.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: center;
 }
 
 .hero-copy {
-  max-width: 36rem;
+  max-width: 49rem;
 }
 
 .hero-brand {
-  font-size: clamp(3.2rem, 8vw, 5.5rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  margin-bottom: 1.25rem;
+  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  margin-bottom: 1.35rem;
   color: var(--ink);
 }
 
 .hero-tagline {
-  font-size: clamp(1.1rem, 2vw, 1.25rem);
-  line-height: 1.55;
-  color: var(--muted);
-  margin-bottom: 0.85rem;
-}
-
-.hero-role {
-  font-size: 1rem;
+  max-width: 43rem;
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+  line-height: 1.58;
   color: var(--ink-soft);
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
-.hero-role strong {
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 44rem;
+  margin: 0 0 2.1rem;
+}
+
+.hero-meta div {
+  border-top: 2px solid var(--line-strong);
+  padding-top: 0.85rem;
+}
+
+.hero-meta dt {
   color: var(--accent);
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.28rem;
+  text-transform: uppercase;
+}
+
+.hero-meta dd {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .hero-cta {
@@ -123,47 +161,77 @@ const go = (id: string) => {
   gap: 0.85rem;
 }
 
-.hero-visual {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
+.author-card {
+  align-self: end;
+  background: var(--paper-elevated);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
+  padding: 1rem;
 }
 
 .photo-frame {
   position: relative;
-  width: 100%;
-  max-width: 420px;
-}
-
-.photo-ring {
-  position: absolute;
-  inset: -10px;
-  border: 1.5px solid rgba(26, 107, 92, 0.35);
-  border-radius: 8px;
-  animation: ringPulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.photo-glow {
-  position: absolute;
-  inset: 12% 8%;
-  background: radial-gradient(circle, rgba(26, 107, 92, 0.22), transparent 70%);
-  filter: blur(28px);
-  animation: glowBreathe 5s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.95rem;
 }
 
 .hero-photo {
   position: relative;
-  z-index: 1;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1.08;
   object-fit: cover;
   object-position: center top;
-  border-radius: 4px;
-  box-shadow: var(--shadow);
-  animation: photoFloat 6s ease-in-out infinite, photoIn 1s var(--ease) both;
+  filter: saturate(0.88) contrast(1.04);
+  animation: photoIn 0.8s var(--ease) both;
+}
+
+.photo-caption {
+  margin-top: 0.6rem;
+  color: var(--muted);
+  font-size: 0.83rem;
+  font-style: italic;
+}
+
+.author-note {
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.note-label {
+  display: block;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+}
+
+.author-note p {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.quick-links {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+  padding-top: 1rem;
+}
+
+.quick-links li {
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.quick-links span {
+  color: var(--accent);
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin-right: 0.45rem;
 }
 
 @keyframes photoIn {
@@ -177,44 +245,8 @@ const go = (id: string) => {
   }
 }
 
-@keyframes photoFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes ringPulse {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.015);
-  }
-}
-
-@keyframes glowBreathe {
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-photo,
-  .photo-ring,
-  .photo-glow {
+  .hero-photo {
     animation: photoIn 0.6s var(--ease) both;
   }
 }
@@ -222,20 +254,20 @@ const go = (id: string) => {
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
-    padding: 6.5rem 0 3rem;
+    padding: 7rem 0 3.5rem;
   }
 
-  .hero-grid {
+  .hero-shell {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 
-  .hero-visual {
-    justify-content: center;
+  .author-card {
+    max-width: 390px;
   }
 
-  .photo-frame {
-    max-width: 340px;
+  .hero-meta {
+    grid-template-columns: 1fr;
   }
 }
 </style>

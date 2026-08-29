@@ -1,47 +1,59 @@
 <template>
   <section id="projects" class="section projects">
-    <div class="container">
-      <header class="projects-header">
+    <div class="container editorial-grid">
+      <aside class="section-aside">
+        <span class="section-number">01</span>
         <p class="section-eyebrow">En production</p>
-        <h2 class="section-title">Projets livrés</h2>
-        <p class="section-lead">
-          Produits utilisés au quotidien. Mon dépôt GitHub contient aussi de
-          nombreux projets expérimentaux et d’apprentissage — comme la conception
-          d’une API Gateway avec Node.js / Express.
-        </p>
-      </header>
-
-      <div class="project-list">
-        <article
-          v-for="(project, index) in projects"
-          :key="project.id"
-          class="project"
-          :class="{ featured: index === 0 }"
-        >
-          <div class="project-meta">
-            <span class="project-type">{{ project.type }}</span>
-            <span v-if="project.status" class="project-status">{{ project.status }}</span>
-          </div>
-          <h3 class="project-name">{{ project.name }}</h3>
-          <p class="project-desc">{{ project.description }}</p>
-          <div class="project-tags">
-            <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
-          </div>
-          <div v-if="project.live" class="project-links">
-            <a
-              :href="project.live"
-              target="_blank"
-              rel="noopener"
-              class="btn btn-ghost"
-            >
-              Visiter le site <i class="fas fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <div class="projects-note">
         <p>
+          Une sélection de produits utilisés au quotidien, présentés comme des
+          notes de terrain plutôt que comme de simples vignettes.
+        </p>
+      </aside>
+
+      <div class="projects-content">
+        <header class="projects-header">
+          <h2 class="section-title">Projets livrés</h2>
+          <p class="section-lead">
+            Produits utilisés au quotidien. Mon dépôt GitHub contient aussi de
+            nombreux projets expérimentaux et d’apprentissage — comme la conception
+            d’une API Gateway avec Node.js / Express.
+          </p>
+        </header>
+
+        <div class="project-list">
+          <article
+            v-for="(project, index) in projects"
+            :key="project.id"
+            class="project"
+            :class="{ featured: index === 0 }"
+          >
+            <div class="project-index">0{{ index + 1 }}</div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">{{ project.type }}</span>
+                <span v-if="project.status" class="project-status">{{ project.status }}</span>
+              </div>
+              <h3 class="project-name">{{ project.name }}</h3>
+              <p class="project-desc">{{ project.description }}</p>
+              <div class="project-tags">
+                <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+              </div>
+            </div>
+            <div v-if="project.live" class="project-links">
+              <a
+                :href="project.live"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-ghost"
+              >
+                Visiter le site <i class="fas fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-note">
+        <p class="section-lead">
           D’autres réalisations (MCoreSystem, KCoreSystem, prototypes et labs)
           complètent mon parcours — certains en production, d’autres à titre
           expérimental ou pédagogique.
@@ -55,6 +67,7 @@
           <i class="fab fa-github"></i>
           Explorer mon référentiel GitHub
         </a>
+        </div>
       </div>
     </div>
   </section>
@@ -116,61 +129,59 @@ const projects: Project[] = [
 
 <style scoped>
 .projects {
-  background: var(--paper-elevated);
+  background: linear-gradient(180deg, var(--paper-elevated), #fff6e9);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
 
 .projects-header {
-  margin-bottom: 3rem;
-  max-width: 40rem;
+  margin-bottom: 2.5rem;
+  max-width: 48rem;
 }
 
 .project-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .project {
-  padding: 1.75rem 1.5rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--paper);
-  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
+  gap: 1.4rem;
+  align-items: start;
+  padding: 1.55rem 0;
+  border-top: 1px solid var(--line);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
 .project:hover {
-  border-color: rgba(26, 107, 92, 0.35);
-  box-shadow: var(--shadow);
+  border-color: var(--accent);
+  transform: translateX(4px);
 }
 
 .project.featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 2rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--paper) 55%);
+  grid-template-columns: 4rem 1fr minmax(120px, auto);
+  padding: 2rem 1.4rem;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow);
 }
 
 .project.featured .project-name {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
 }
 
 .project.featured .project-desc {
-  grid-column: 2;
-  grid-row: 2 / 4;
-  align-self: center;
   font-size: 1.05rem;
 }
 
-.project.featured .project-tags,
-.project.featured .project-links {
-  grid-column: 1;
+.project-index {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 1;
 }
 
 .project-meta {
@@ -182,9 +193,9 @@ const projects: Project[] = [
 
 .project-type {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -196,52 +207,54 @@ const projects: Project[] = [
   color: var(--accent);
   background: var(--accent-soft);
   padding: 0.2rem 0.55rem;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 .project-name {
-  font-size: 1.35rem;
+  font-size: 1.48rem;
   margin: 0;
 }
 
 .project-desc {
   font-size: 0.98rem;
   line-height: 1.6;
-  flex: 1;
+  max-width: 46rem;
+  margin-top: 0.55rem;
 }
 
 .project-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+  margin-top: 0.9rem;
 }
 
 .project-tags span {
   font-size: 0.78rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink-soft);
-  background: var(--paper-elevated);
+  background: rgba(255, 250, 241, 0.68);
   border: 1px solid var(--line);
   padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  border-radius: 999px;
 }
 
 .project-links {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 0.25rem;
+  justify-content: flex-end;
+  padding-top: 0.45rem;
 }
 
 .projects-note {
-  margin-top: 2.75rem;
-  padding: 1.75rem;
-  border: 1px dashed var(--line);
-  border-radius: var(--radius);
-  text-align: center;
+  margin-top: 2.2rem;
+  padding: 1.6rem 1.8rem;
+  border-left: 4px solid var(--accent);
+  background: var(--paper);
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 1.15rem;
 }
 
@@ -252,17 +265,19 @@ const projects: Project[] = [
 }
 
 @media (max-width: 768px) {
-  .project-list {
-    grid-template-columns: 1fr;
-  }
-
+  .project,
   .project.featured {
     grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
 
-  .project.featured .project-desc {
-    grid-column: 1;
-    grid-row: auto;
+  .project-links {
+    justify-content: flex-start;
+  }
+
+  .projects-note {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 </style>

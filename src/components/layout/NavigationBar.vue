@@ -2,8 +2,8 @@
   <nav class="nav" :class="{ scrolled: isScrolled }">
     <div class="nav-inner container">
       <a href="#home" class="brand" @click.prevent="scrollTo('#home')">
-        <span class="brand-mark">EO</span>
         <span class="brand-name">Elie Oko</span>
+        <span class="brand-subtitle">Software notes</span>
       </a>
 
       <div class="nav-links">
@@ -29,7 +29,7 @@
         >
           <i class="fab fa-github"></i>
         </a>
-        <button class="btn btn-primary nav-cta" @click="scrollTo('#contact')">
+        <button class="nav-cta" @click="scrollTo('#contact')">
           Contact
         </button>
         <button
@@ -54,7 +54,7 @@
         {{ link.label }}
       </a>
       <a href="https://github.com/ElieOko" target="_blank" rel="noopener">GitHub</a>
-      <button class="btn btn-primary" @click="scrollTo('#contact')">Contact</button>
+      <button class="nav-cta mobile-cta" @click="scrollTo('#contact')">Contact</button>
     </div>
   </nav>
 </template>
@@ -104,16 +104,18 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 1.1rem 0;
+  padding: 0.95rem 0;
+  background: rgba(255, 250, 241, 0.86);
+  border-bottom: 1px solid rgba(55, 44, 35, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease), padding 0.3s var(--ease);
 }
 
 .nav.scrolled {
-  background: rgba(243, 245, 248, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 var(--line);
-  padding: 0.7rem 0;
+  background: rgba(255, 250, 241, 0.95);
+  box-shadow: 0 10px 28px rgba(65, 42, 24, 0.08);
+  padding: 0.68rem 0;
 }
 
 .nav-inner {
@@ -125,8 +127,9 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 .brand {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.12rem;
   color: var(--ink);
   text-decoration: none;
 }
@@ -135,35 +138,32 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   color: var(--ink);
 }
 
-.brand-mark {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  background: var(--ink);
-  color: #fff;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.85rem;
-  border-radius: 8px;
-}
-
 .brand-name {
   font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.18rem;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.brand-subtitle {
+  color: var(--accent);
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.75rem;
+  gap: 1.45rem;
 }
 
 .nav-link {
   color: var(--muted);
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.91rem;
+  font-weight: 700;
   text-decoration: none;
   position: relative;
   padding: 0.25rem 0;
@@ -179,7 +179,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -2px;
+  bottom: -6px;
   height: 2px;
   background: var(--accent);
   border-radius: 1px;
@@ -192,11 +192,11 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .github-link {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
+  border-radius: 50%;
   color: var(--ink);
   font-size: 1.15rem;
   transition: background 0.2s var(--ease);
@@ -208,8 +208,22 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 .nav-cta {
-  padding: 0.6rem 1.15rem;
-  font-size: 0.9rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 800;
+  padding: 0.48rem 1rem;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.nav-cta:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .menu-toggle {
@@ -274,11 +288,12 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   .mobile-panel a {
     padding: 0.85rem 0;
     color: var(--ink);
-    font-weight: 600;
+    font-weight: 700;
     border-bottom: 1px solid var(--line);
   }
 
-  .mobile-panel .btn {
+  .mobile-cta {
+    width: fit-content;
     margin-top: 0.75rem;
   }
 }

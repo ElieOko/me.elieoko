@@ -38,10 +38,11 @@ const year = new Date().getFullYear()
 
 <style scoped>
 .footer {
-  background: var(--ink);
-  color: rgba(255, 255, 255, 0.7);
-  padding: 3rem 0 1.5rem;
+  background: #211c18;
+  color: rgba(255, 250, 241, 0.72);
+  padding: 3.4rem 0 1.6rem;
   margin-top: auto;
+  border-top: 6px solid var(--accent);
 }
 
 .footer-inner {
@@ -65,19 +66,20 @@ const year = new Date().getFullYear()
   height: 40px;
   display: grid;
   place-items: center;
-  background: var(--accent);
-  color: #fff;
+  background: var(--paper-elevated);
+  color: var(--accent);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 900;
   font-size: 0.85rem;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 
 .footer-brand strong {
   display: block;
-  color: #fff;
+  color: var(--paper-elevated);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
+  letter-spacing: -0.04em;
 }
 
 .footer-brand p {
@@ -93,13 +95,13 @@ const year = new Date().getFullYear()
 }
 
 .footer-nav a {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 250, 241, 0.72);
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .footer-nav a:hover {
-  color: #fff;
+  color: var(--paper-elevated);
 }
 
 .footer-social {
@@ -112,9 +114,9 @@ const year = new Date().getFullYear()
   height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  border-radius: 50%;
+  background: rgba(255, 250, 241, 0.08);
+  color: var(--paper-elevated);
   font-size: 1.1rem;
   transition: background 0.2s var(--ease);
 }
@@ -131,7 +133,7 @@ const year = new Date().getFullYear()
 .footer-copy p {
   margin: 0;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 250, 241, 0.45);
 }
 
 @media (max-width: 640px) {

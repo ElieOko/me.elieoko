@@ -4,9 +4,9 @@
     <div class="photo-wrapper">
       <!-- Simple Photo with Hover Effect -->
       <div class="simple-frame">
-        <img 
-          src="../../assets/images/elie.jpeg" 
-          alt="Your Name"
+        <img
+          src="https://avatars.githubusercontent.com/u/109554173?v=4"
+          alt="Elie Oko"
           class="simple-photo"
           @load="imageLoaded = true"
         />

@@ -5,7 +5,7 @@
       <!-- Simple Photo with Hover Effect -->
       <div class="simple-frame">
         <img
-          src="https://avatars.githubusercontent.com/u/109554173?v=4"
+          src="/elie-profile.jpg"
           alt="Elie Oko"
           class="simple-photo"
           @load="imageLoaded = true"

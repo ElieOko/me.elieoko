@@ -43,7 +43,7 @@
       <aside class="author-card reveal reveal-delay-2" aria-label="Profil d'Elie Oko">
         <div class="photo-frame">
           <img
-            src="https://avatars.githubusercontent.com/u/109554173?v=4"
+            src="/elie-profile.jpg"
             alt="Elie Oko"
             class="hero-photo"
           />
@@ -178,9 +178,9 @@ const go = (id: string) => {
 .hero-photo {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.08;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 32%;
   filter: saturate(0.88) contrast(1.04);
   animation: photoIn 0.8s var(--ease) both;
 }

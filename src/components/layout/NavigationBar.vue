@@ -69,6 +69,7 @@ const active = ref('home')
 const links = [
   { label: 'Accueil', href: '#home' },
   { label: 'Projets', href: '#projects' },
+  { label: 'Observabilité', href: '#observability' },
   { label: 'Expertise', href: '#expertise' },
   { label: 'Veille', href: '#veille' },
   { label: 'Contact', href: '#contact' },

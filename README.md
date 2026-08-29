@@ -29,9 +29,48 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 npm install
 ```
 
+## Sentry observability
+
+The portal reads production metrics with this flow:
+
+```text
+Frontend Vue -> Backend Node (/api/sentry/*) -> Sentry API
+```
+
+Keep the Sentry auth token only on the backend. Configure these environment variables on the
+server or hosting platform:
+
+```sh
+SENTRY_ORG=your-sentry-org
+SENTRY_PROJECT_SLUG=your-sentry-project-slug
+SENTRY_AUTH_TOKEN=your-backend-only-sentry-token
+SENTRY_API_BASE_URL=https://sentry.io/api/0
+SENTRY_DSN=https://public-key@o0000000000000000.ingest.sentry.io/0000000000000000
+PORT=3000
+```
+
+For Sentry organizations hosted in the EU region, set:
+
+```sh
+SENTRY_API_BASE_URL=https://de.sentry.io/api/0
+```
+
+`SENTRY_PROJECT_SLUG` is optional. If it is omitted, the backend exposes every project returned
+by the configured Sentry organization.
+`SENTRY_DSN` is optional for API reads; it only helps the backend infer the EU API host when
+`SENTRY_API_BASE_URL` is omitted. The backend also accepts `SENTRY_DNS` for compatibility with
+existing deployments that use that variable name.
+
 ### Compile and Hot-Reload for Development
 
 ```sh
+npm run dev
+```
+
+Run the frontend with the backend proxy during development:
+
+```sh
+npm run dev:api
 npm run dev
 ```
 
@@ -39,4 +78,10 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+Serve the production build and the Sentry API backend:
+
+```sh
+npm run start
 ```

@@ -8,9 +8,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "dev:api": "node server/index.mjs",
+    "dev:full": "run-p dev:api dev",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
+    "start": "node server/index.mjs",
     "type-check": "vue-tsc --build"
   },
   "dependencies": {

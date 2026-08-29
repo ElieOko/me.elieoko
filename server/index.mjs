@@ -8,6 +8,11 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const rootDir = resolve(__dirname, '..')
 const distDir = resolve(rootDir, 'dist')
 
+const localEnvPath = join(rootDir, '.env')
+if (typeof process.loadEnvFile === 'function' && existsSync(localEnvPath)) {
+  process.loadEnvFile(localEnvPath)
+}
+
 const port = Number(process.env.PORT || 3000)
 const sentryOrg = process.env.SENTRY_ORG
 const configuredProjectSlug =
@@ -115,10 +120,12 @@ async function getSentryConfig() {
       slug: project.slug,
       name: project.name || project.slug,
       platform: project.platform || null,
-      environments: environments
-        .filter((environment) => hasProjectMatch(environment, project.id))
-        .map((environment) => environment.name)
-        .sort((a, b) => a.localeCompare(b)),
+      environments: uniqueSorted(
+        environments
+          .filter((environment) => hasProjectMatch(environment, project.id))
+          .map((environment) => environment.name)
+          .filter(Boolean),
+      ),
     })),
     environments: uniqueSorted(environments.map((environment) => environment.name).filter(Boolean)),
     defaultProjectSlug: configuredProjectSlug || visibleProjects[0]?.slug || null,
@@ -307,7 +314,7 @@ async function fetchEventsStats({ projectIds, environments, statsPeriod, interva
   appendFilters(params, projectIds, environments)
 
   const payload = await sentryFetch(
-    `/organizations/${encodeURIComponent(sentryOrg)}/events-stats/`,
+    `/organizations/${encodeURIComponent(sentryOrg)}/events/stats/`,
     params,
   )
 
@@ -415,7 +422,17 @@ function appendRepeatedParam(target, key, value) {
 }
 
 function normalizeStats(payload) {
-  const rawData = Array.isArray(payload?.data) ? payload.data : []
+  if (Array.isArray(payload?.timeSeries)) {
+    const countSeries = payload.timeSeries.find((series) => series.yAxis === 'count()') || payload.timeSeries[0]
+
+    return (countSeries?.values || []).map((point) => ({
+      timestamp: toIsoTimestamp(point.timestamp),
+      count: extractStatsCount(point.value),
+    }))
+  }
+
+  const seriesPayload = payload?.['count()'] || payload
+  const rawData = Array.isArray(seriesPayload?.data) ? seriesPayload.data : []
 
   return rawData.map((point) => {
     if (Array.isArray(point)) {
